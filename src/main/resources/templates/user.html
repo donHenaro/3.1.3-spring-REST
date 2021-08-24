@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Информация о пользователе</title>
+</head>
+<body>
+<p><form action="/logout"><input type="submit" value="Logout"></form></p>
+<h1 th:text="${info}">here is info</h1>
+<table style="border-collapse: collapse; width: 60%;" border="1">
+    <tr>
+        <td>Id</td>
+        <td th:text="${user.getId()}"></td>
+    </tr>
+    <tr>
+        <td>ФИО</td>
+        <td th:text="${user.getName()}"></td>
+    </tr>
+    <tr>
+        <td>Логин</td>
+        <td th:text="${user.getUsername()}"></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td th:text="${user.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td>Роли</td>
+        <td th:text="${user.getRoles()}"></td>
+    </tr>
+</table>
+</body>
+</html>
