@@ -8,6 +8,8 @@ import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
+import java.security.Principal;
+
 
 @Controller
 @RequestMapping("")
@@ -21,7 +23,7 @@ public class AdminController {
         this.rs = rs;
     }
 
-    @GetMapping("/admin/admin")
+     @GetMapping("/admin/admin")
     public String getAllUsers(ModelMap model) {
         model.addAttribute("users", us.listUsers());
         return "admin/admin";
