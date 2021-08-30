@@ -24,8 +24,11 @@ public class AdminController {
     }
 
      @GetMapping("/admin/admin")
-    public String getAllUsers(ModelMap model) {
+    public String getAllUsers(@ModelAttribute("user") User user, ModelMap model, Principal principal) {
         model.addAttribute("users", us.listUsers());
+        model.addAttribute("currentUser", us.findByUsername(principal.getName()));
+
+         model.addAttribute("roles", rs.getRoles());
         return "admin/admin";
     }
 

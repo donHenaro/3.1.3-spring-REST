@@ -55,7 +55,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return String.format("[%d:%s]", id, roleName.substring(5));
+        return roleName.substring(5);
     }
 
     @Override
