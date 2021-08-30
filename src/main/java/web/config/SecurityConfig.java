@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //для Юзера
                 .antMatchers("/user").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
                 // защищенные Админа
-                .antMatchers("/admin/**", "/update/**", "/user/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated()
+                .antMatchers("/admin/**", "/modal/**", "/user/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated()
         ;
     }
 

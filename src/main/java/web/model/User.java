@@ -24,7 +24,7 @@ public class User implements UserDetails {
    @Column(name = "password")
    private String password;
 
-   @ManyToMany  //(fetch = FetchType.LAZY)
+   @ManyToMany  //(fetch = FetchType.LAZY)  <----- LAZY по умолчанию
    @JoinTable(name = "users_roles",
            joinColumns = @JoinColumn(name = "users_id"),
            inverseJoinColumns = @JoinColumn(name = "roles_id"))

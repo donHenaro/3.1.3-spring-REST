@@ -22,8 +22,7 @@ public class UserController {
 
 	@GetMapping("/user")
 	public String openUserView(ModelMap model, Principal principal) {
-		model.addAttribute("user", us.findByUsername(principal.getName()));
-		model.addAttribute("info", "Кабинет пользователя");
+		model.addAttribute("currentUser", us.findByUsername(principal.getName()));
 		return "user";
 	}
 }
