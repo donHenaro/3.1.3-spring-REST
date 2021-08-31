@@ -1,12 +1,14 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
+
 import java.security.Principal;
 
 @Controller
@@ -22,9 +24,11 @@ public class AdminController {
     }
 
     @GetMapping("/admin/admin")
-    public String getAllUsers(@ModelAttribute("user") User user, ModelMap model, Principal principal) {
+    public String getAllUsers(@ModelAttribute("user") User user, ModelMap model) {
         model.addAttribute("users", us.listUsers());
-        model.addAttribute("currentUser", us.findByUsername(principal.getName()));
+//      model.addAttribute("currentUser", us.findByUsername(principal.getName()));
+        model.addAttribute("currentUser",
+                (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("roles", rs.getRoles());
         return "admin/admin";
     }
