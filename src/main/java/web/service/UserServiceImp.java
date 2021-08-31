@@ -3,7 +3,7 @@ package web.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import web.dao.UserDao;
+import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserRepository;
 import web.model.User;
 import java.util.List;
@@ -13,13 +13,11 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
 
    private final UserRepository userRep;
-   private final UserDao userDao;
    private final PasswordEncoder passEncoder;
 
    @Autowired
-   public UserServiceImp(UserRepository userRep, PasswordEncoder passwordEncoder, UserDao userDao) {
+   public UserServiceImp(UserRepository userRep, PasswordEncoder passwordEncoder) {
       this.userRep = userRep;
-      this.userDao = userDao;
       this.passEncoder = passwordEncoder;
    }
 
@@ -61,8 +59,8 @@ public class UserServiceImp implements UserService {
    }
 
    @Override
-   public User findByUsername(String username) {
-      return userDao.findByUsername(username);
+    public User findByUsername(String username) {
+      return userRep.findByUsername(username);
    }
 
 }

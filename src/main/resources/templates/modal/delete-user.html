@@ -5,14 +5,14 @@
 				<h4 class="modal-title text-white">Удаление пользователя</h4>
 			</div>
 			<div class="modal-body">
-				<p>Вы хотите удалить пользователя:<h6><span style="font-weight:bold" th:text="|${user.name}|"></span>?</h6></p>
+				<p>Вы хотите удалить пользователя:<h5><span style="font-weight:bold" th:text="|${user.id} ${user.name}|"></span>?</h5></p>
 
 				<!-------------------------------->
 				<div class="form-group text-center">
 
-					<label for="username"
-						   class="col-form-label font-weight-bolder">ID</label>
-					<input type="text" class="form-control" id="ID" th:field="${user.id}" readonly>
+<!--					<label for="username"-->
+<!--						   class="col-form-label font-weight-bolder">ID</label>-->
+<!--					<input type="text" class="form-control" id="ID" th:field="${user.id}" readonly>-->
 
 					<label for="username"
 						   class="col-form-label font-weight-bolder">Логин</label>

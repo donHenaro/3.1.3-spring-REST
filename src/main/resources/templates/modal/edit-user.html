@@ -7,14 +7,14 @@
 			<form th:action="@{/edit-user}" method="post" id="edit-user-form">
 				
 				<div class="modal-body">
-					<h5><span style="font-weight:bold" th:text="|${user.name}|"></span></h5>
+					<h5><span style="font-weight:bold" th:text="|${user.id} ${user.name}|"></span></h5>
 
 					<!-------------------------------->
 					<div class="form-group text-center">
 
-						<label for="username"
-							   class="col-form-label font-weight-bolder">ID</label>
-						<input type="text" class="form-control" id="ID" th:field="${user.id}" readonly>
+<!--						<label for="username"-->
+<!--							   class="col-form-label font-weight-bolder">ID</label>-->
+<!--						<input type="text" class="form-control" id="ID" th:field="${user.id}" readonly>-->
 
 						<label for="username"
 							   class="col-form-label font-weight-bolder">Имя фамилия</label>
