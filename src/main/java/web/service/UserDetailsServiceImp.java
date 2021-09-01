@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import web.model.User;
 
 
 @Service
@@ -14,8 +15,18 @@ public class UserDetailsServiceImp implements UserDetailsService {
     private UserService us;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String searchStr) throws UsernameNotFoundException {
+        User user = us.findByUsername(searchStr); //Поиск по логину
+        if(user != null){
+            return (UserDetails) user;
+        }
+        user = us.findByEmail(searchStr);
+        if(user != null){
+            return (UserDetails) user;
+        }
 
-        return (UserDetails) us.findByUsername(username);
+        throw new  UsernameNotFoundException("Пользователь не существует");
     }
+
 }
+

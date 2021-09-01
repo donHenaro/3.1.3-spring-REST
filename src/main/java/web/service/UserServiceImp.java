@@ -63,4 +63,9 @@ public class UserServiceImp implements UserService {
       return userRep.findByUsername(username);
    }
 
+   @Override
+   public User findByEmail(String email) {
+      return userRep.findByEmail(email);
+   }
+
 }

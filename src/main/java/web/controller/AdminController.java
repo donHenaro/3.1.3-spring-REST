@@ -9,8 +9,6 @@ import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping("")
 public class AdminController {
@@ -26,7 +24,6 @@ public class AdminController {
     @GetMapping("/admin/admin")
     public String getAllUsers(@ModelAttribute("user") User user, ModelMap model) {
         model.addAttribute("users", us.listUsers());
-//      model.addAttribute("currentUser", us.findByUsername(principal.getName()));
         model.addAttribute("currentUser",
                 (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("roles", rs.getRoles());
@@ -50,7 +47,7 @@ public class AdminController {
         User user = us.findById(id);
         model.addAttribute("user", user);
         model.addAttribute("roles", rs.getRoles());
-        return "modal/delete-user :: delete-user";
+        return "admin/delete-user :: delete-user";
     }
 
     @PostMapping(value = "/delete-user/{id}")
@@ -64,7 +61,7 @@ public class AdminController {
         User user = us.findById(id);
         model.addAttribute("user", user);
         model.addAttribute("roles", rs.getRoles());
-        return "modal/edit-user :: edit-user";
+        return "admin/edit-user :: edit-user";
     }
 
     @PostMapping(value = "/edit-user")

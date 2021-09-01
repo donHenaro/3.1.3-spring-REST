@@ -101,8 +101,7 @@
                                                     <th>ДЕЙСТВИЕ</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <th:block th:each="user : ${users}">
+                                                <tbody th:each="user : ${users}">
                                                     <tr>
                                                         <td><a th:text="${user.getId()}"></a></td>
                                                         <td><a th:text="${user.getName()}"></a></td>
@@ -116,7 +115,6 @@
                                                                class="btn btn-danger btn-xs">Удалить</a>
                                                         </td>
                                                     </tr>
-                                                </th:block>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -154,8 +152,7 @@
                                             <label for="roles" class="col-form-label font-weight-bolder">Выберите
                                                 роли:</label>
                                             <select class="form-control font-weight-bolder" th:object="${roles}"
-                                                    size="2"
-                                                    name="listRoles" id="roles" multiple>
+                                                    size="2" name="listRoles" id="roles" multiple>
                                                 <div th:each="role : ${roles}">
                                                     <option th:value="${role.getRoleName()}"
                                                             th:text="${role.getRoleName().substring(5)}"

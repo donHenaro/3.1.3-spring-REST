@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 // указываем страницу с формой логина
-                //.loginPage("/login") <-- отключаем корявую форму, используем форму по умолчанию
+                .loginPage("/login") //<-- отключаем корявую форму, используем форму по умолчанию
                 //указываем логику обработки при логине
                 .successHandler(loginSuccessHandler)//new LoginSuccessHandler()
                 // указываем action с формы логина
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
-                //.logoutSuccessUrl("/login?logout") <-- отключаем корявую форму
+                .logoutSuccessUrl("/login?logout") //<-- отключаем корявую форму
                 //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
                 .and().csrf().disable();
 
@@ -66,13 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //для Юзера
                 .antMatchers("/user").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
                 // защищенные Админа
-                .antMatchers("/admin/**", "/modal/**", "/user/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated()
+                .antMatchers("/admin/**", "/user/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated()
         ;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();//NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }
 
