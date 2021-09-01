@@ -2,14 +2,11 @@ package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleRepository;
 import web.model.Role;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImp implements RoleService{
@@ -28,6 +25,6 @@ public class RoleServiceImp implements RoleService{
 
     @Override
     public Set<Role> getRolesByName(String[] roles) {
-        return Arrays.stream(roles).map(roleRep::findByRoleName).collect(Collectors.toSet());
+        return new HashSet<Role>(roleRep.findRolesByRolenamesArray(roles));
     }
 }
