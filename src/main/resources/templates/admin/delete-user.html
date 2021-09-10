@@ -11,7 +11,7 @@
 				<div class="form-group text-center">
 
 					<label for="username"
-						   class="col-form-label font-weight-bolder">ID</label>
+						   class="col-form-label font-weight-bolder" hidden>ID</label>
 					<input type="text" class="form-control" id="ID" th:field="${user.id}" readonly hidden>
 
 					<label for="username"
@@ -25,7 +25,7 @@
 					<select class="form-control font-weight-bolder" th:object="${roles}" size="2"
 							name="listRoles" id="roles" multiple readonly>
 
-						<div th:each="role : ${roles}">
+						<div th:each="role : ${roles}" readonly>
 							<option th:value="${role.getRoleName()}"
 									th:text="${role.getRoleName().substring(5)}"
 									th:selected="${user.getRoles().contains(role)}">

@@ -20,12 +20,46 @@ public class AdminController {
         this.us = us;
         this.rs = rs;
     }
+//--------------------REST------------------------------------------
+    @GetMapping("/admin/index")
+    public String getAllUsersREST(@ModelAttribute("user") User user, ModelMap model) {
+//        model.addAttribute("currentUser",
+//                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("roles", rs.getRoles());
+        return "admin/index";
+    }
+//    @GetMapping(value = "/edit-rest/{id}")
+//    public String editUserModalREST(@PathVariable("id") long id, ModelMap model) {
+//        User user = us.findById(id);
+//        model.addAttribute("user", user);
+//        model.addAttribute("roles", rs.getRoles());
+//        return "admin/edit-rest :: edit-rest";
+//    }
+
+    @GetMapping(value = "/edit-rest/{id}")
+    public String editUserModalREST(@PathVariable("id") long id, ModelMap model) {
+//        User user = us.findById(id);
+//        model.addAttribute("user", user);
+        model.addAttribute("roles", rs.getRoles());
+        return "admin/edit-rest :: edit-rest";
+    }
+
+    @PostMapping(value = "/edit-rest")
+    public String editUserREST(@ModelAttribute User user,
+                           @RequestParam(required = false, name = "listRoles") String[] arrRoles) {
+        if (arrRoles != null) {
+            user.setRoles(rs.getRolesByName(arrRoles));
+        }
+        us.update(user);
+        return "redirect:/admin/index";
+    }
+//----------------------------------------------------------------
 
     @GetMapping("/admin/admin")
     public String getAllUsers(@ModelAttribute("user") User user, ModelMap model) {
         model.addAttribute("users", us.listUsers());
         model.addAttribute("currentUser",
-                (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("roles", rs.getRoles());
         return "admin/admin";
     }
@@ -37,7 +71,7 @@ public class AdminController {
             user.setRoles(rs.getRolesByName(arrRoles));
         }
         us.create(user);
-        return "redirect:/admin/admin";
+        return "redirect:/admin/index";
     }
 
     //------Модальные диалоги--------

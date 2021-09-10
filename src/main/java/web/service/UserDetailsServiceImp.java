@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import web.model.User;
 
-
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
@@ -20,11 +19,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
         if(user != null){
             return (UserDetails) user;
         }
-        user = us.findByEmail(searchStr);
+        user = us.findByEmail(searchStr); //Поиск по email
         if(user != null){
             return (UserDetails) user;
         }
-
         throw new  UsernameNotFoundException("Пользователь не существует");
     }
 

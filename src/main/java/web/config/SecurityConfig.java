@@ -36,17 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                // указываем страницу с формой логина
-                .loginPage("/login") //<-- отключаем корявую форму, используем форму по умолчанию
-                //указываем логику обработки при логине
-                .successHandler(loginSuccessHandler)//new LoginSuccessHandler()
-                // указываем action с формы логина
-                .loginProcessingUrl("/login")
-                // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("j_username")
+                .loginPage("/login") // указываем страницу с формой логина
+                .successHandler(loginSuccessHandler)//указываем логику обработки при логине
+                .loginProcessingUrl("/login")// указываем action с формы логина
+                .usernameParameter("j_username") // Указываем параметры логина и пароля с формы логина
                 .passwordParameter("j_password")
-                // даем доступ к форме логина всем
-                .permitAll();
+                .permitAll(); // даем доступ к форме логина всем
 
         http.logout()
                 // разрешаем делать логаут всем
@@ -54,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout") //<-- отключаем корявую форму
+                .logoutSuccessUrl("/login?logout")
                 //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
                 .and().csrf().disable();
 
@@ -62,12 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
-                .antMatchers("/login").anonymous()
+                .antMatchers("/login", "/api/users/**","/api/users").anonymous()
                 //для Юзера
-                .antMatchers("/user").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+                .antMatchers("/user", "/api/users/**","/api/users").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
                 // защищенные Админа
-                .antMatchers("/admin/**", "/user/**").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated()
-        ;
+                .antMatchers("/admin/**", "/user/**", "/api/users/**","/api/users").access("hasAnyRole('ROLE_ADMIN')").anyRequest().authenticated();
+
     }
 
     @Bean

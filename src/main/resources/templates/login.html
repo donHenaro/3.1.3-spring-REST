@@ -13,7 +13,7 @@
     <form class="form-signin" method="post" action="/login">
         <h3 class="form-signin-heading align-center">Пожалуйста войдите</h3>
         <div th:if="${param.error}" class="alert alert-warning">
-            Неправильные имя и пароль.
+            Неправильные имя или пароль.
         </div>
         <div th:if="${param.logout}" class="alert alert-success">
             Вы вышли из аккаунта.

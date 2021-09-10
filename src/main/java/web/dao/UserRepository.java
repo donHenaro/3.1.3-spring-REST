@@ -7,10 +7,10 @@ import web.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(name = "Username.findWithRoles", value = "from User u JOIN FETCH u.roles where u.username = :username")
+    @Query(name = "User.Username.findWithRoles", value = "from User u JOIN FETCH u.roles where u.username = :username")
     User findByUsername(@Param("username") String username);
 
-    @Query(name = "Email.findWithRoles", value = "from User u JOIN FETCH u.roles where u.email = :email")
+    @Query(name = "User.Email.findWithRoles", value = "from User u JOIN FETCH u.roles where u.email = :email")
     User findByEmail(@Param("email") String email);
 
 }
