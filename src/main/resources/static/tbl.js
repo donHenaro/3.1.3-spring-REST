@@ -22,9 +22,9 @@ $(document).ready(function () {
             }
         }
     });
-
 })
 
+//Список ролей
 function getAllRoles() {
     fetch("/api/roles").then(
         res => {
@@ -54,7 +54,7 @@ function renderRolesSelect(data) {
         return ret;
     }
 }
-
+// Таблица с пользователями
 function getAllUsers() {
     fetch("/api/users").then(
         res => {
