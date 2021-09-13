@@ -208,8 +208,7 @@ $(document).on('submit', '#userFormEdit', function (e) {
     let formData = new FormData(e.target);
     formData.forEach((value, key) => user[key] = value);
 
-    let roles = arrRoles('rolesEdit')
-    user.roles = roles;
+    user.roles = arrRoles('rolesEdit');
 
     $.ajax({
         url: '/api/users',
@@ -222,7 +221,7 @@ $(document).on('submit', '#userFormEdit', function (e) {
             tds[1].innerHTML = user.name;
             tds[2].innerHTML = user.username;
             tds[3].innerHTML = user.email;
-            tds[4].innerHTML = '[' + strRoles(roles) + ']';
+            tds[4].innerHTML = '[' + strRoles(user.roles) + ']';
             $('#userFormEdit')[0].reset();
 
         }
